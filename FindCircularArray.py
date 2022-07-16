@@ -1,70 +1,44 @@
 # Python3 program to demonstrate the use of
 # circular array without using extra memory space
- 
+
 # function to print circular list starting
 # from given index ind.
-def prints(roulette, n, ind, Range):
-    i = ind
-    count = 0 
-    #print from ind-th index to (n+i)th index.
-    print ('Forwarind counting starting: ')
-    while i < n + ind :
-        print( roulette[(i % n)], end = " ")
-        i = i + 1
-        count += 1
-        if (count == int(Range)):
-            break
+def range_around_selection(roulette, arr_index, user_range):
+    n = len(roulette) - 1
+    num_list = []
 
-    #while i < n + ind :
-    #    print( roulette[(i % n)], end = " ")
-    #    i -= 1
-    #    if i == ind:
-    #        break
+    right = False
+    if user_range > 0:
+        right = True
 
-def reverseCircularArray(roulette, n, ind, Range):
-    K = int(ArrIndex)
-    start, end = K, K - 1
-    
-    count = n // 1
-    sheep = 0
-    print('\n')
-    print ('Backward counting starting: ')
-    while (count):
-    
-        temp = roulette[start % n]
-        roulette[start % n] = roulette[end % n]
-        roulette[end % n] = temp
-        print(roulette[K], end = " ")
-        #start += 1
-        end -= 1
-        
-        if (count == StartIndex):
-            #end = n - 1
-            break
-        count -= 1
-        
-        sheep += 1
-        if (sheep == int(Range)):
-            break
-    
-    #print from ind-th index to (n+i)th index.
-    #print ('Forwarind counting starting: ')
-    #while i < n + ind :
- 
-# Driver Code
-roulette = ['00',27,10,25,29,12,8,19,31,18,6,21,33,16,4,23,35,14,2,0,28,9,26,30,11,7,20,32,17,5,22,34,15,3,24,36,13,1]
-n = len(roulette);
+    for i in range(abs(user_range)):
+        if right:
+            index = arr_index + i + 1
+        else:
+            index = arr_index - i - 1
+        print(arr_index, index, index % n)
+        if index > n:
+            index = (index % n) - 1
+        elif index < 0:
+            index = (index % n) + 1
 
-#asking to find the number and reverse index location
-selection = input('Please select a number: ')
+        num_list.append(roulette[index])
 
-#asking for how wide of selection from starting number selection
-Range = input('Please select a range size: ')
+    return num_list
 
+# List of Roulette Wheel Numbers
+roulette = ['00', '27', '10', '25', '29', '12', '8', '19',
+            '31', '18', '06', '21', '33', '16', '4', '23',
+            '35', '14', '2', '0', '28', '9', '26', '30',
+            '11', '7', '20', '32', '17', '5', '22', '34',
+            '15', '3', '24', '36', '13', '1']
 
-ArrIndex = roulette.index(int(selection))
-StartIndex = ArrIndex
-prints(roulette, n, int(ArrIndex), Range);
+# asking to find the number and reverse index location
+selection = str(input('Please select a number: '))
 
-reverseCircularArray(roulette, n, int(ArrIndex), Range)
+# asking for how wide of selection from starting number selection
+user_range = int(input('Please select a range size: '))
 
+arr_index = roulette.index(selection)
+print("Right of : ", selection, " are these numbers: ", range_around_selection(roulette, arr_index, user_range))
+print("Left of : ", selection, " are these numbers: ", range_around_selection(roulette, arr_index, -abs(user_range)))
