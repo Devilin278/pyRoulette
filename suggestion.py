@@ -24,12 +24,7 @@ class Suggestion:
                 index = self.arr_index + i + 1
             else:
                 index = self.arr_index - i - 1
-
-            # Change index value to cycle around
-            if index > self.wheel_length:
-                index = (index % self.wheel_length) - 1
-            elif index < 0:
-                index = (index % self.wheel_length) + 1
+            index = config.ensure_loop(index)
 
             num_list.append(self.wheel[index])
 

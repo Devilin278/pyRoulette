@@ -1,5 +1,6 @@
 import config
 import random
+import time
 
 
 class Spin:
@@ -12,17 +13,19 @@ class Spin:
 
     def generate(self):
         print('The ball is released around the wheel...')
+        time.sleep(1)
+        print('the ball starts to slow down...')
+        time.sleep(1)
+
         self.contact_number = random.randrange(self.wheel_length)
         print('and bounces near the number', self.contact_number, ',')
 
         max_num = random.randrange(5)
         for i in range(max_num):
+            time.sleep(1)
             self.direction, move = random.choice(list(self.choice.items()))
             index = self.wheel.index(str(self.contact_number)) + move
-            if index > self.wheel_length:
-                index = (index % self.wheel_length) - 1
-            elif index < 0:
-                index = (index % self.wheel_length) + 1
+            index = config.ensure_loop(index)
 
             self.contact_number = self.wheel[index]
             if i < max_num - 1:

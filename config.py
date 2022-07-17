@@ -6,3 +6,11 @@ wheel = ['00', '27', '10', '25', '29', '12', '8', '19',
          '15', '3', '24', '36', '13', '1']
 
 wheel_length = len(wheel) - 1
+
+def ensure_loop(index):
+    # Change index value to cycle around
+    if index > wheel_length:
+        index = (index % wheel_length) - 1
+    elif index < 0:
+        index = (index % wheel_length) + 1
+    return index
