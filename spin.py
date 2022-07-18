@@ -12,6 +12,7 @@ class Spin:
         self.contact_number = 0
 
     def generate(self):
+        print('\n', '######## NEW SPIN ABOUT TO BEGIN! ########')
         print('The ball is released around the wheel...')
         time.sleep(1)
         print('the ball starts to slow down...')
